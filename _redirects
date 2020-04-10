@@ -1,1 +1,1 @@
-/api/*   /.netlify/functions/server/:splat
+/api/*   /.netlify/functions/server/:splat   200!
