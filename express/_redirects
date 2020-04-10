@@ -1,1 +1,1 @@
-/.netlify/functions/server    /
+/api/*   /.netlify/functions/server/:splat
