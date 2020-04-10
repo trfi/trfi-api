@@ -1,4 +1,4 @@
-/api/*   /.netlify/functions/server/:splat
+/api/*   /.netlify/functions/server/:splat 200!
 /cms   /.netlify/functions/server/cms 200
 /cms2   /.netlify/functions/server/cms2 200!
 /cms3   /.netlify/functions/server/cms3
