@@ -6,6 +6,9 @@ const {checkKey} = require('../controllers/BraveTool')
 router.get('/api/cms', function(req, res) {
     res.json(cms_data);
 })
+router.get('/api/toolbrave/checkkey', function (req, res) {
+  res.send('nothing here')
+})
 router.post('/api/toolbrave/checkkey', checkKey)
 
 module.exports = router
