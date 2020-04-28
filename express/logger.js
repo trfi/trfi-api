@@ -1,13 +1,6 @@
 const {transports, createLogger, format} = require('winston')
 const { combine, timestamp, label, printf } = format
-
-const fs = require( 'fs' );
-const path = require('path');
-const logDir = 'log'; // directory path you want to set
-if ( !fs.existsSync( logDir ) ) {
-    // Create the directory if it does not exist
-    fs.mkdirSync( logDir );
-}
+const path = require('path')
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp}: ${message}`
