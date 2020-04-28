@@ -20,6 +20,8 @@ router.get('/api/logs/info', function (req, res) {
   })
 })
 
-console.log(__dirname)
+router.get('/api/dir', function (req, res) {
+  return res.send(`<pre>${__dirname}</pre>`)
+})
 
 module.exports = router
