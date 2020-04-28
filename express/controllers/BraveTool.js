@@ -1,5 +1,5 @@
 const keys = require('../../data/key-tool-brave.json')
-const logger = require('../logger')
+//const logger = require('../logger')
 
 function check(key) {
   for (key_ of keys) {
@@ -29,7 +29,7 @@ module.exports = {
       req.connection.remoteAddress || 
       req.socket.remoteAddress || 
       req.connection.socket.remoteAddress
-      logger.info(`Check Key: ${req.body.key} - IP: ${ip} - UA: ${req.get('user-agent')}`)
+      //logger.info(`Check Key: ${req.body.key} - IP: ${ip} - UA: ${req.get('user-agent')}`)
     }
   }
 }

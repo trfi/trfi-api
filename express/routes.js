@@ -20,4 +20,6 @@ router.get('/api/logs/info', function (req, res) {
   })
 })
 
+console.log(__dirname)
+
 module.exports = router
