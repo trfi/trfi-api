@@ -1,6 +1,14 @@
 const {transports, createLogger, format} = require('winston')
 const { combine, timestamp, label, printf } = format
 
+const fs = require( 'fs' );
+const path = require('path');
+const logDir = 'log'; // directory path you want to set
+if ( !fs.existsSync( logDir ) ) {
+    // Create the directory if it does not exist
+    fs.mkdirSync( logDir );
+}
+
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp}: ${message}`
 })
@@ -12,15 +20,15 @@ const timezoned = () => {
 }
 
 const logger = createLogger({
-  level: 'debug',
+  level: 'info',
   format: combine(
     timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
     myFormat
   ),
   transports: [
-    new transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new transports.File({ filename: 'logs/info.log', level: 'info' }),
-    new transports.File({ filename: 'logs/debug.log', level: 'debug' })
+    new transports.File({ filename: path.join(__dirname, './logs/error.log'), level: 'error' }),
+    new transports.File({ filename: path.join(__dirname, './logs/info.log'), level: 'info' }),
+    new transports.File({ filename: path.join(__dirname, './logs/debug.log'), level: 'debug' })
   ]
 })
  

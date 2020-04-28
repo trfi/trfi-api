@@ -1,5 +1,5 @@
-const keys = require('../data/key-tool-brave.json')
-const logger = require('../logger.js')
+const keys = require('../../data/key-tool-brave.json')
+const logger = require('../logger')
 
 function check(key) {
   for (key_ of keys) {
