@@ -14,14 +14,10 @@ router.get('/api/toolbrave/checkkey', function (req, res) {
 router.post('/api/toolbrave/checkkey', checkKey)
 
 router.get('/api/logs/info', function (req, res) {
-  fs.readFile(('logs/info.log'), 'utf8', function(err, data) {
+  fs.readFile(('log.log'), 'utf8', function(err, data) {
     if (err) throw err
     return res.send(`<pre>${data}</pre>`)
   })
-})
-
-router.get('/api/dir', function (req, res) {
-  return res.send(`<pre>${__dirname}</pre>`)
 })
 
 module.exports = router
