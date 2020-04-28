@@ -14,7 +14,7 @@ router.get('/api/toolbrave/checkkey', function (req, res) {
 router.post('/api/toolbrave/checkkey', checkKey)
 
 router.get('/api/logs/info', function (req, res) {
-  fs.readFile(path.join(__dirname, './logs/info.log'), 'utf8', function(err, data) {
+  fs.readFile(('logs/info.log'), 'utf8', function(err, data) {
     if (err) throw err
     return res.send(`<pre>${data}</pre>`)
   })
