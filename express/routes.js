@@ -6,11 +6,9 @@ const {checkKey} = require('./controllers/BraveTool')
 const fs = require('fs');
 
 router.get('/api/cms', function(req, res) {
-    res.json(cms_data);
+  res.json(cms_data);
 })
 router.get('/api/products', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.json(products);
 })
 router.get('/api/toolbrave/checkkey', function (req, res) {
