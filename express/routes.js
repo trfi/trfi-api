@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router();
 const cms_data = require('../data/cms_data.json')
 const products = require('../data/products.json')
-const {bravetool} = require('./controllers/BraveTool')
-const {bravevps} = require('./controllers/BraveVps')
+const bravetool = require('./controllers/BraveTool')
+const bravevps = require('./controllers/BraveVps')
 const fs = require('fs');
 
 router.get('/api/cms', function(req, res) {
@@ -18,8 +18,8 @@ router.get('/api/products', function(req, res) {
 router.get('/api/toolbrave/checkkey', function (req, res) {
   res.send('nothing here')
 })
-router.post('/api/toolbrave/checkkey', bravetool)
-router.post('/api/bravevps/checkkey', bravevps)
+router.post('/api/toolbrave/checkkey', bravetool.checkKey)
+router.post('/api/bravevps/checkkey', bravevps.checkKey)
 
 
 module.exports = router
