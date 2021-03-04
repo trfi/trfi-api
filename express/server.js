@@ -13,7 +13,6 @@ const mongoose = require('mongoose');
 
 app.use(bodyParser.json());
 app.use(cors())
-app.use('/', router);  // path must route to lambda
 
 app.use('/api', checkkey);
 app.use('/api/quizpoly/lms', quizlms);
