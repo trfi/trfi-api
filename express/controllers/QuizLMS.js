@@ -3,8 +3,15 @@ const QuizLMS = require('../models/QuizLMS')
 module.exports = {
   async getAll(req, res, next) {
     try {
-      const quizzes = await QuizLMS.find();
+      const quizzes = await QuizLMS.find({}, {_id: 0, __v: 0});
       res.json(quizzes);
+    } catch (err) {
+      res.status(400).json({message: err});
+    }
+  },
+  async count(req, res, next) {
+    try {
+      res.json(await QuizLMS.count())
     } catch (err) {
       res.status(400).json({message: err});
     }
