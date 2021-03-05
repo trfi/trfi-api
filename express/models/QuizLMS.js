@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const QuizLmsSchema = mongoose.Schema({
-  question: {
+  ques: {
     type: String,
     required: true,
     unique: true
   },
-  answer: {
+  ans: {
     type: String,
     required: true
   },

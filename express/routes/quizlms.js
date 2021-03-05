@@ -4,7 +4,7 @@ const quizlms = require('../controllers/QuizLMS')
 
 router.get('/', quizlms.getAll)
 router.get('/getBySubject/:subjectId', quizlms.getBySubject)
-router.get('/deleteBySubject/:subjectId', quizlms.deleteBySubject)
+router.delete('/deleteBySubject/:subjectId', quizlms.deleteBySubject)
 router.post('/add', quizlms.add)
 
 
