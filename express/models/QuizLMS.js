@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const QuizLmsSchema = mongoose.Schema({
+const QuizLmsSchema = new Schema({
   ques: {
     type: String,
     required: true,
-    unique: true
   },
   ans: {
     type: String,
@@ -21,4 +20,6 @@ const QuizLmsSchema = mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('quizlms', QuizLmsSchema);
+QuizLmsSchema.index( { "ques": 1, "ans": 1 }, { unique: true } )
+
+module.exports = model('quizlms', QuizLmsSchema);
