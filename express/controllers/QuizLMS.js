@@ -4,7 +4,7 @@ module.exports = {
   async getAll(req, res, next) {
     try {
       const quizzes = await QuizLMS.find({}, {_id: 0, __v: 0});
-      res.json(quizzes);
+      res.json({data: quizzes});
     } catch (err) {
       res.status(400).json({message: err});
     }
@@ -37,15 +37,21 @@ module.exports = {
   async add(req, res, next) {
     try {
       const {subjectId, subjectName, quizzes} = req.body;
-      quizzes.forEach(item => {
-        item.subjectId = subjectId
-        item.subjectName = subjectName
-      })
-      result = await QuizLMS.insertMany(quizzes, { ordered: false })
-      res.json({message: `Added ${result.length} quiz success`})
+      result = await QuizLMS.updateMany(
+        { subjectId },
+        {
+          subjectId,
+          subjectName,
+          $addToSet: { quizzes }
+        }, 
+        {
+          upsert: true
+        }
+      );
+      const count = result.upserted == undefined ? result.nModified : quizzes.length
+      res.json({message: `Added ${count} quiz success`})
     } catch (err) {
-      if (err.code = 11000) res.status(201).json({message: `Added ${err.result.nInserted} quiz`})
-      else res.status(400).json({message: err})
+      res.status(400).json({message: err});
     }
   }
 }

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const QuizLmsSchema = new Schema({
+const QuizzesSchema = new Schema({
   ques: {
     type: String,
     required: true,
@@ -9,6 +9,11 @@ const QuizLmsSchema = new Schema({
     type: String,
     required: true
   },
+}, { _id: false }
+)
+
+
+const QuizLmsSchema = new Schema({
   subjectId: {
     type: String,
     required: true,
@@ -17,9 +22,10 @@ const QuizLmsSchema = new Schema({
   subjectName: {
     type: String,
     required: true
-  }
+  },
+  quizzes: [QuizzesSchema]
 })
 
-QuizLmsSchema.index( { "ques": 1, "ans": 1 }, { unique: true } )
+QuizLmsSchema.index( { 'subjectId': 1, 'quizzes.ques': 1, 'quizzes.ans': 1 }, { unique: true } )
 
 module.exports = model('quizlms', QuizLmsSchema);

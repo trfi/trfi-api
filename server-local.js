@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const checkkey = require('./express/routes/checkkey');
-const quizlms = require('./express/routes/quizlms');
+const quizlms = require('./express/routes/quizlmsRoute');
 const mongoose = require('mongoose');
 require('dotenv').config();
 

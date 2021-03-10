@@ -7,7 +7,7 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const checkkey = require('./routes/checkkey');
-const quizlms = require('./routes/quizlms');
+const quizlms = require('./routes/quizlmsRoute');
 const mongoose = require('mongoose');
 
 
