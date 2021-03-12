@@ -37,6 +37,7 @@ module.exports = {
     }
   },
   async add(req, res, next) {
+    console.log(`Request from ${req.headers['user-agent']}`);
     try {
       const {subjectId, subjectName, quizzes} = req.body;
       const result = await QuizLMS.updateMany(
@@ -51,7 +52,7 @@ module.exports = {
         }
       );
       const count = result.upserted == undefined ? result.nModified : quizzes.length
-      console.log(`${req.headers['user-agent']}: Added ${count} quiz success`);
+      console.log(`Added ${count} quiz success`);
       res.json({message: `Added ${count} quiz success`})
     } catch (err) {
       res.status(400).json({message: err});
