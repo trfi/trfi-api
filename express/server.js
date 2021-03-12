@@ -21,7 +21,7 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION,
-  { useUnifiedTopology: true }, 
+  { useUnifiedTopology: false }, 
   { useNewUrlParser: true }
 )
 .then(() => console.log('DB Connected!'));

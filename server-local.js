@@ -18,7 +18,7 @@ app.use('/api/quizpoly/lms', quizlms);
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION,
-  { useUnifiedTopology: true }, 
+  { useUnifiedTopology: false }, 
   { useNewUrlParser: true }
 )
 .then(() => console.log('DB Connected!'));
