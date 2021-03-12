@@ -1,4 +1,6 @@
 const QuizLMS = require('../models/QuizLMS')
+const QuizLMSold = require('../models/QuizLMSold')
+
 
 module.exports = {
   async getAll(req, res, next) {
@@ -37,7 +39,7 @@ module.exports = {
   async add(req, res, next) {
     try {
       const {subjectId, subjectName, quizzes} = req.body;
-      result = await QuizLMS.updateMany(
+      const result = await QuizLMS.updateMany(
         { subjectId },
         {
           subjectId,
@@ -49,9 +51,37 @@ module.exports = {
         }
       );
       const count = result.upserted == undefined ? result.nModified : quizzes.length
+      console.log(`${req.headers['user-agent']}: Added ${count} quiz success`);
       res.json({message: `Added ${count} quiz success`})
     } catch (err) {
       res.status(400).json({message: err});
     }
+  },
+  async test(req, res, next) {
+    const {subjectId} = req.body;
+    let quizzes = await QuizLMSold.find({subjectId}, {'ques': 1, 'ans': 1, 'subjectName': 1, '_id': 0})
+    const subjectName = quizzes[0].subjectName
+    let quizzesNew = []
+    quizzes.map(item => {
+      let ques = item.ques
+      let ans = item.ans
+      let oj = {ques, ans}
+      quizzesNew.push(oj)
+    })
+    // Add quiz
+    const result = await QuizLMS.updateMany(
+      { subjectId },
+      {
+        subjectId,
+        subjectName,
+        $addToSet: { quizzes: quizzesNew }
+      }, 
+      {
+        upsert: true
+      }
+    );
+    console.log(result)
+    const count = result.upserted == undefined ? result.nModified : quizzes.length
+    res.json({message: `Added ${count} quiz success`})
   }
 }
