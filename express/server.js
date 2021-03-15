@@ -21,10 +21,12 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION,
-  { useUnifiedTopology: false }, 
-  { useNewUrlParser: true }
+  { useUnifiedTopology: true }, 
+  { useNewUrlParser: true },
+  { serverSelectionTimeoutMS: 5000 }
 )
-.then(() => console.log('DB Connected!'));
+.then(() => console.log('DB Connected!'))
+.catch((err) => console.log(err));
 
 module.exports = app;
 module.exports.handler = serverless(app);
