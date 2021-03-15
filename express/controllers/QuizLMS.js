@@ -51,9 +51,10 @@ module.exports = {
           upsert: true
         }
       );
-      const count = result.upserted == undefined ? result.nModified : quizzes.length
-      console.log(`Added ${count} quiz success`);
-      res.json({message: `Added ${count} quiz success`})
+      const count = result.upserted == undefined ? result.nModified : quizzes.length;
+      const message = `${subjectName}: Added ${count} quiz success`;
+      console.log(message);
+      res.json({message});
     } catch (err) {
       res.status(400).json({message: err});
     }
