@@ -13,7 +13,7 @@ module.exports = {
   },
   async count(req, res, next) {
     try {
-      const result = QuizLMS.aggregate([{$group : {_id : "$subjectName", count: {$sum: {$size: "$quizzes"}}}}])
+      const result = await QuizLMS.aggregate([{$group : {_id : "$subjectName", count: {$sum: {$size: "$quizzes"}}}}])
       res.json(result)
     } catch (err) {
       res.status(400).json({message: err});
