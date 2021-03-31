@@ -22,7 +22,10 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 mongoose.connect(process.env.DB_CONNECTION,
   { useUnifiedTopology: true }, 
   { useNewUrlParser: true },
-  { serverSelectionTimeoutMS: 5000 },
+  { socketTimeoutMS: 60000},
+  { heartbeatFrequencyMS: 5000},
+  { serverSelectionTimeoutMS: 30000 },
+  { keepAlive: true},
   { useCreateIndex: true }
 )
 .then(() => console.log('DB Connected!'))
