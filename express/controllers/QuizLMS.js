@@ -1,6 +1,6 @@
 const QuizLMS = require('../models/QuizLMS')
 const QuizLMSold = require('../models/QuizLMSold')
-
+const { slug } = require('../../utils')
 
 module.exports = {
   async getAll(req, res, next) {
@@ -40,7 +40,12 @@ module.exports = {
   async add(req, res, next) {
     console.log(`Request from ${req.headers['user-agent']}`);
     try {
-      const {subjectId, subjectName, quizzes} = req.body;
+      const {subjectName, quizzes} = req.body
+      if (!subjectName) {
+        console.log('subjectName null');
+        res.status(400).json({message: 'subjectName null'});
+      }
+      const subjectId = slug(subjectName)
       const result = await QuizLMS.updateMany(
         { subjectId },
         {
