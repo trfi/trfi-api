@@ -20,10 +20,11 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 function connect() {
   mongoose.connect(process.env.DB_CONNECTION,
-    { useUnifiedTopology: true }, 
+    { useUnifiedTopology: true },
+    { keepAlive: true },
     { useNewUrlParser: true },
-    { socketTimeoutMS: 86400000},
-    { maxTimeMS: 30000 },
+    { socketTimeoutMS: 3600000 },
+    { maxTimeMS: 60000 },
     { useCreateIndex: true },
     { serverSelectionTimeoutMS: 10000 },
   )
@@ -31,7 +32,7 @@ function connect() {
 }
 
 const db = mongoose.connection;
-const reconnectTimeout = 5000;
+const reconnectTimeout = 3000;
 
 db.on('connecting', () => {
   console.info('Connecting to MongoDB...');
