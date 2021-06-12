@@ -31,6 +31,7 @@ function connect() {
 }
 
 const db = mongoose.connection;
+const reconnectTimeout = 5000;
 
 db.on('connecting', () => {
   console.info('Connecting to MongoDB...');
