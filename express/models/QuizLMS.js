@@ -9,7 +9,7 @@ const QuizzesSchema = new Schema({
     type: String,
     required: true
   },
-}, { _id: false, versionKey: false }
+}, { _id: false, versionKey: false, timestamps: true }
 )
 
 
@@ -24,7 +24,7 @@ const QuizLmsSchema = new Schema({
     required: true
   },
   quizzes: [QuizzesSchema]
-})
+}, { versionKey: false })
 
 QuizLmsSchema.index( { 'subjectId': 1, 'quizzes.ques': 1, 'quizzes.ans': 1 }, { unique: true } )
 

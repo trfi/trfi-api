@@ -1,5 +1,6 @@
 const QuizLMS = require('../models/QuizLMS')
-const QuizLMSold = require('../models/QuizLMSold')
+const LmsHtml = require('../models/LmsHtml')
+const QuizSelf = require('../models/QuizSelf')
 const { slug } = require('../../utils')
 
 module.exports = {
@@ -29,22 +30,27 @@ module.exports = {
     }
   },
   async getBySubject(req, res, next) {
+    let { subject } = req.params
     try {
-      const {subjectId} = req.params
-      const quizzes = await QuizLMS.find({subjectId});
-      res.json({data: quizzes});
+      if (subject.includes(' ')) subject = slug(subject)
+      const quizzes = await QuizLMS.findOne({subjectId: subject})
+      res.json({data: quizzes})
     } catch (err) {
-      res.status(400).json({message: err});
+      console.error(err);
+      res.status(400).json({message: err})
     }
   },
   async add(req, res, next) {
     console.log(`Request from ${req.headers['user-agent']}`);
     try {
-      const {subjectName, quizzes} = req.body
+      let {subjectName, quizzes} = req.body
       if (!subjectName) {
         console.log('subjectName null');
         res.status(400).json({message: 'subjectName null'});
       }
+      quizzes = quizzes.filter((qa) => {
+        return (qa.ques != "" && qa.answer != "")
+      })
       const subjectId = slug(subjectName)
       const result = await QuizLMS.updateMany(
         { subjectId },
@@ -65,31 +71,30 @@ module.exports = {
       res.status(400).json({message: err});
     }
   },
-  async test(req, res, next) {
-    const {subjectId} = req.body;
-    let quizzes = await QuizLMSold.find({subjectId}, {'ques': 1, 'ans': 1, 'subjectName': 1, '_id': 0})
-    const subjectName = quizzes[0].subjectName
-    let quizzesNew = []
-    quizzes.map(item => {
-      let ques = item.ques
-      let ans = item.ans
-      let oj = {ques, ans}
-      quizzesNew.push(oj)
-    })
-    // Add quiz
-    const result = await QuizLMS.updateMany(
-      { subjectId },
-      {
-        subjectId,
-        subjectName,
-        $addToSet: { quizzes: quizzesNew }
-      }, 
-      {
-        upsert: true
+  async addHtml(req, res, next) {
+    try {
+      await LmsHtml.create({...req.body}).then(res => console.log(res._id))
+      res.json({message: 'success'})
+    } catch (err) {
+      res.status(400).json({message: err})
+    }
+  },
+  async addQuizSelf(req, res, next) {
+    try {
+      let { subjectName, pointFull } = req.body
+      if (!subjectName) {
+        console.log('subjectName null');
+        res.status(400).json({message: 'subjectName null'});
       }
-    );
-    console.log(result)
-    const count = result.upserted == undefined ? result.nModified : quizzes.length
-    res.json({message: `Added ${count} quiz success`})
+
+      const subjectId = slug(subjectName)
+
+      const point = Number(pointFull.split(' Of ')[0])
+
+      await QuizSelf.create({subjectId, point, ...req.body}).then(res => console.log(res))
+      res.json({message: 'success'})
+    } catch (err) {
+      res.status(400).json({message: err})
+    }
   }
 }
