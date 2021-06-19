@@ -91,7 +91,7 @@ module.exports = {
 
       const point = Number(pointFull.split(' Of ')[0])
 
-      await QuizSelf.create({subjectId, point, ...req.body}).then(res => console.log(res))
+      await QuizSelf.create({subjectId, point, ...req.body})
       res.json({message: 'success'})
     } catch (err) {
       res.status(400).json({message: err})

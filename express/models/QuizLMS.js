@@ -24,7 +24,7 @@ const QuizLmsSchema = new Schema({
     required: true
   },
   quizzes: [QuizzesSchema]
-}, { versionKey: false })
+}, { versionKey: false, timestamps: true })
 
 QuizLmsSchema.index( { 'subjectId': 1, 'quizzes.ques': 1, 'quizzes.ans': 1 }, { unique: true } )
 

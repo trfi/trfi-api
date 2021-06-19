@@ -40,7 +40,7 @@ const QuizSelfSchema = new Schema({
   quizzes: [QuizzesSchema],
   created: {
     type: String,
-    default: new Date().toLocaleString('vi-VN')
+    default: new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
   },
 
 }, {
