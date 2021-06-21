@@ -1,6 +1,7 @@
 const QuizLMS = require('../models/QuizLMS')
 const LmsHtml = require('../models/LmsHtml')
 const QuizSelf = require('../models/QuizSelf')
+const UserUsing = require('../models/UserUsing')
 const { slug } = require('../../utils')
 
 module.exports = {
@@ -72,14 +73,25 @@ module.exports = {
     }
   },
   async addHtml(req, res, next) {
+    const created = new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
     try {
-      await LmsHtml.create({...req.body}).then(res => console.log(res._id))
+      await LmsHtml.create({...req.body, created}).then(res => console.log(res._id))
+      res.json({message: 'success'})
+    } catch (err) {
+      res.status(400).json({message: err})
+    }
+  },
+  async addUserUsing(req, res, next) {
+    const date = new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
+    try {
+      await UserUsing.create({...req.body, date}).then(res => console.log(res._id))
       res.json({message: 'success'})
     } catch (err) {
       res.status(400).json({message: err})
     }
   },
   async addQuizSelf(req, res, next) {
+    const created = new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
     try {
       let { subjectName, pointFull } = req.body
       if (!subjectName) {
@@ -91,7 +103,7 @@ module.exports = {
 
       const point = Number(pointFull.split(' Of ')[0])
 
-      await QuizSelf.create({subjectId, point, ...req.body})
+      await QuizSelf.create({subjectId, point, created, ...req.body})
       res.json({message: 'success'})
     } catch (err) {
       res.status(400).json({message: err})

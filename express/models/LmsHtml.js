@@ -10,7 +10,7 @@ const LmsHtmlSchema = new Schema({
   },
   created: {
     type: String,
-    default: new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
+    required: true
   }
 }, {
   versionKey: false
