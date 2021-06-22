@@ -29,6 +29,9 @@ const UserUsing = new Schema({
     type: Number,
     required: true
   },
+  lmsC: {
+    type: String
+  },
   date: {
     type: String,
     required: true
