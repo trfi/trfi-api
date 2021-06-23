@@ -7,8 +7,7 @@ const QuizzesSchema = new Schema({
     required: true,
   },
   ans: {
-    type: String,
-    required: true
+    type: String
   },
   seq: {
     type: Number

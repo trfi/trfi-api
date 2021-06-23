@@ -50,7 +50,7 @@ module.exports = {
         res.status(400).json({message: 'subjectName null'});
       }
       quizzes = quizzes.filter((qa) => {
-        return (qa.ques != "" && qa.answer != "")
+        return (qa.ques != "" && qa.ans != "")
       })
       const subjectId = slug(subjectName)
       const result = await QuizLMS.updateMany(
