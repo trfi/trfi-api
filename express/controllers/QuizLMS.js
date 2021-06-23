@@ -41,6 +41,17 @@ module.exports = {
       res.status(400).json({message: err})
     }
   },
+  async getBySubjectPost(req, res, next) {
+    let { subject } = req.body
+    try {
+      if (subject.includes(' ')) subject = slug(subject)
+      const quizzes = await QuizLMS.findOne({subjectId: subject})
+      res.json({data: quizzes})
+    } catch (err) {
+      console.error(err);
+      res.status(400).json({message: err})
+    }
+  },
   async add(req, res, next) {
     console.log(`Request from ${req.headers['user-agent']}`);
     try {
