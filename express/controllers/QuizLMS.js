@@ -83,6 +83,14 @@ module.exports = {
       res.status(400).json({message: err});
     }
   },
+  async getHtml(req, res, next) {
+    try {
+      const result = await LmsHtml.find({}, { _id: 0 }, { limit: 50, sort: { _id: -1 } });
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err });
+    }
+  },
   async addHtml(req, res, next) {
     const created = new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})
     try {
@@ -90,6 +98,14 @@ module.exports = {
       res.json({message: 'success'})
     } catch (err) {
       res.status(400).json({message: err})
+    }
+  },
+  async getUserUsing(req, res, next) {
+    try {
+      const result = await UserUsing.find({}, { _id: 0 }, { limit: 50, sort: { _id: -1 } });
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err });
     }
   },
   async addUserUsing(req, res, next) {
@@ -117,7 +133,7 @@ module.exports = {
       await QuizSelf.create({subjectId, point, created, ...req.body})
       res.json({message: 'success'})
     } catch (err) {
-      res.status(400).json({message: err})
+      res.status(400).json({ message: err })
     }
   }
 }
