@@ -85,7 +85,7 @@ module.exports = {
   },
   async getHtml(req, res, next) {
     try {
-      const result = await LmsHtml.find({}, { _id: 0 }, { limit: 50, sort: { _id: -1 } });
+      const result = await LmsHtml.find({}, { _id: 0 }, { limit: 20, sort: { _id: -1 } });
       res.json(result);
     } catch (err) {
       res.status(400).json({ message: err });
@@ -115,6 +115,14 @@ module.exports = {
       res.json({message: 'success'})
     } catch (err) {
       res.status(400).json({message: err})
+    }
+  },
+  async getQuizSelf(req, res, next) {
+    try {
+      const result = await QuizSelf.find({}, { _id: 0 }, { limit: 50, sort: { _id: -1 } });
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err });
     }
   },
   async addQuizSelf(req, res, next) {
