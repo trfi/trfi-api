@@ -4,9 +4,9 @@ const quizlms = require('../controllers/QuizLMS')
 
 
 router.get('/', quizlms.getAll)
-router.get('/userusing', quizlms.getUserUsing)
+router.get('/using', quizlms.getUserUsing)
 router.get('/html', quizlms.getHtml)
-router.get('/quizself', quizlms.getQuizSelf)
+router.get('/self', quizlms.getQuizSelf)
 router.post('/', quizlms.add)
 router.get('/count', quizlms.count)
 router.get('/:subject', quizlms.getBySubject)
@@ -14,8 +14,9 @@ router.post('/quiz', quizlms.getBySubjectPost)
 router.delete('/deleteBySubject/:subjectId', quizlms.deleteBySubject)
 router.post('/add', quizlms.add)
 router.post('/html', quizlms.addHtml)
+router.post('/using', quizlms.addUserUsing)
 router.post('/userusing', quizlms.addUserUsing)
-router.post('/quizself', quizlms.addQuizSelf)
+router.post('/self', quizlms.addQuizSelf)
 
 
 module.exports = router
