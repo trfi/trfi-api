@@ -6,12 +6,10 @@ const UserUsing = new Schema({
     required: true
   },
   studentCode: {
-    type: String,
-    required: true
+    type: String
   },
   term: {
-    type: String,
-    required: true
+    type: String
   },
   userServer: {
     type: String,
@@ -29,7 +27,7 @@ const UserUsing = new Schema({
     type: Number,
     required: true
   },
-  lmsC: {
+  c: {
     type: String
   },
   date: {
