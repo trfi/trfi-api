@@ -6,10 +6,10 @@ const QuizzesSchema = new Schema({
     required: true,
   },
   ans: {
-    type: String,
+    type: Schema.Types.Mixed,
     required: true
-  },
-}, { _id: false, versionKey: false, timestamps: true }
+  }
+}, { _id: false, versionKey: false }
 )
 
 

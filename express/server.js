@@ -7,6 +7,7 @@ const app = express();
 const cors = require('cors')
 const checkkey = require('./routes/checkkey');
 const quizlms = require('./routes/quizlmsRoute');
+const quizcms = require('./routes/quizcmsRoute');
 const mongoose = require('mongoose');
 
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api', checkkey);
+app.use('/api/quizpoly/cms', quizcms);
 app.use('/api/quizpoly/lms', quizlms);
 
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));

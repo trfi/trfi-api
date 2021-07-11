@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const QuizzesSchema = new Schema({
-  ques: {
+  q: {
     type: String,
     required: true,
   },
-  ans: {
+  a: {
     type: Schema.Types.Mixed,
     required: true
   }
@@ -13,7 +13,7 @@ const QuizzesSchema = new Schema({
 )
 
 
-const QuizSelfSchema = new Schema({
+const QuizCmsSchema = new Schema({
   subjectId: {
     type: String,
     required: true,
@@ -26,6 +26,6 @@ const QuizSelfSchema = new Schema({
   quizzes: [QuizzesSchema]
 }, { versionKey: false, timestamps: true })
 
-QuizSelfSchema.index( { 'subjectId': 1, 'quizzes.ques': 1, 'quizzes.ans': 1 }, { unique: true } )
+QuizCmsSchema.index( { 'subjectId': 1, 'quizzes.q': 1, 'quizzes.a': 1 }, { unique: true } )
 
-module.exports = model('quizself', QuizSelfSchema, 'quizself');
+module.exports = model('quizcms', QuizCmsSchema);

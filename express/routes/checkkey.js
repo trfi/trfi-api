@@ -6,9 +6,9 @@ const bravetool = require('../controllers/BraveTool')
 const bravevps = require('../controllers/BraveVps')
 const fs = require('fs');
 
-router.get('/cms', function(req, res) {
-  res.json(cms_data);
-})
+// router.get('/cms', function(req, res) {
+//   res.json(cms_data);
+// })
 router.get('/products', function(req, res) {
   res.json(products);
 })

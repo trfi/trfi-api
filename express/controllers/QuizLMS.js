@@ -111,6 +111,7 @@ module.exports = {
       console.log(message);
       res.json({message});
     } catch (err) {
+      console.error(err)
       res.status(400).json({message: err});
     }
   },

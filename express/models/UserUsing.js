@@ -24,8 +24,7 @@ const UserUsing = new Schema({
     required: true
   },
   quizNumber: {
-    type: Number,
-    required: true
+    type: Number
   },
   c: {
     type: String
