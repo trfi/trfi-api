@@ -28,4 +28,5 @@ const QuizCmsSchema = new Schema({
 
 QuizCmsSchema.index( { 'subjectId': 1, 'quizzes.q': 1, 'quizzes.a': 1 }, { unique: true } )
 
+
 module.exports = model('quizcms', QuizCmsSchema);

@@ -1,4 +1,4 @@
-const QuizCMS = require('../models/QuizCMS')
+const QuizCMS = require('../models/QuizCms')
 const { slug } = require('../../utils')
 
 module.exports = {
