@@ -45,7 +45,7 @@ module.exports = {
     let { subject } = req.body
     try {
       if (subject.includes(' ')) subject = slug(subject)
-      const quizzes = await QuizLMS.findOne({subjectId: subject})
+      const quizzes = await QuizLMS.findOne({subjectId: subject.toLowerCase()})
       res.json({data: quizzes})
     } catch (err) {
       console.error(err);
@@ -134,7 +134,7 @@ module.exports = {
   },
   async getUserUsing(req, res, next) {
     try {
-      const result = await UserUsing.find({}, { _id: 0 }, { limit: 100, sort: { _id: -1 } });
+      const result = await UserUsing.find({}, { _id: 0 }, { limit: 200, sort: { _id: -1 } });
       res.json(result);
     } catch (err) {
       res.status(400).json({ message: err });
