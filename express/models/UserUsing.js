@@ -2,8 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const UserUsing = new Schema({
   name: {
-    type: String,
-    required: true
+    type: String
   },
   studentCode: {
     type: String
